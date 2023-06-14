@@ -1,4 +1,4 @@
-#Abrir bloco de Word
+#Abrir bloco de Bloco de Notas
 import pyautogui
 import pyperclip
 
