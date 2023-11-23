@@ -1,0 +1,82 @@
+#importar arquivo csv
+import csv
+
+lista = ['Tonho', 'toto@email.com', '4444-5555', 'rua 5']
+# inserir dados csv
+def adicionar_dados(i):
+    with open('dados.csv', 'a+', newline='') as file:
+        escrever = csv.writer(file)
+        escrever.writerow(i)
+
+# ver dados
+def ver_dados():
+    dados = []
+    with open('dados.csv') as file:
+        ler_csv = csv.reader(file)
+        for linha in ler_csv:
+            dados.append(linha)
+    return dados
+
+# deletar dados
+def deletar_dados(i):
+
+    def add_novaLista(j):
+        with open('dados.csv', 'w', newline='') as file:
+            escrever = csv.writer(file)
+            escrever.writerows(j)
+            ver_dados()
+
+    nova_lista = []
+    telefone = i
+    with open('dados.csv', 'r') as file:
+        ler_csv = csv.reader(file)
+
+        for linha in ler_csv:
+            nova_lista.append(linha)
+            for campo in linha:
+                if campo == telefone:
+                    nova_lista.remove(linha)
+
+    # adiconar lista atualizada
+    add_novaLista(nova_lista)
+
+# Atualizar dados
+def atualizar_dados(i):
+    def add_novaLista(j):
+        with open('dados.csv', 'w', newline='') as file:
+            escrever = csv.writer(file)
+            escrever.writerows(j)
+            ver_dados()
+
+    nova_lista = []
+    telefone = i[0]
+    with open('dados.csv', 'r') as file:
+        ler_csv = csv.reader(file)
+
+        for linha in ler_csv:
+            nova_lista.append(linha)
+            for campo in linha:
+                if campo == telefone:
+                    nome = i[1]
+                    email = i[2]
+                    tel = i[3]
+                    endereco = i[4]
+
+                    dados = [nome, email, tel, endereco]
+                    # trocando lista por index
+                    index = nova_lista.index(linha)
+                    nova_lista[index] = dados
+
+    add_novaLista(nova_lista)
+
+# Pesquisar dados
+def pesq_dados(i):
+    dados = []
+    telefone = i
+    with open('dados.csv') as file:
+        ler_csv = csv.reader(file)
+        for linha in ler_csv:
+            for campo in linha:
+                if campo == telefone:
+                    dados.append(linha)
+    return dados
